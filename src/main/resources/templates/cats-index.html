@@ -9,6 +9,24 @@
     <div class="container">
         <h3>Cats available:</h3>
        
+       <table class="table table-striped">
+       
+       <tr>
+       <th>Id</th>
+       <th>Nickname</th>
+       
+         <tr th:each="cats: ${cats}">
+        <td th:text="${cats.id}"/>
+        <td th:text="${cats.nickname}"/>
+    </tr>
+        </tr>
+     </table>  
+     
+     </div>
+     <div>
+     <a th:href="@{/cats/add}" class="btn btn-outline-primary">Generate a new cat</a>
+    
+       
     </div>
 </body>
 </html>

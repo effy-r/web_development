@@ -1,11 +1,13 @@
 package lv.accenture.bootcamp.webdemo.model;
 
-public class Cat {
+import java.io.Serializable;
+
+public class Cat implements Serializable {
 
 	private Long id;
 	private String nickname;
 
-	Cat(Long id, String nickname) {
+	public Cat(Long id, String nickname) {
 		this.id = id;
 		this.nickname = nickname;
 	}
