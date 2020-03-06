@@ -1,8 +1,10 @@
 package lv.accenture.bootcamp.webdemo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
@@ -30,7 +32,7 @@ public class CatsController {
 	    }
 	 
 	 @GetMapping("/cats/add")
-	 public String addCatPage () {
+	 public String addCatPage (Model model, BindResult<Cat> bindingResult) {
 		 
 		 return "add";
 	 }

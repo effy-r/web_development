@@ -1,24 +1,23 @@
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<!--Simple GET form (no object)-->
-<form th:action="@{/books/search}" method="get">
-    <input type="text" name="searchTitle" id="searchTitle" th:value="${searchTitle}"/>
-    <input type="submit" value="Search"/>
-</form>
-
-<!--Java : model.addAttribute("book", requestedBook);-->
+<head>
+    <title>Web demo index</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
 <form action="#"
-      th:action="@{/books/update/{id}(id=${book.id})}"
-      th:object="${book}" method="post">
+      th:action="@{/cats/add-cat{id}(id=${cats.id})}"
+      th:object="${cat}" method="post">
     <div class="row">
         <div class="form-group col-md-8">
-            <label for="title" class="col-form-label">Title</label>
-            <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="Title">
+            <label for="nickname" class="col-form-label">Nickname:</label><br>
+            <input type="text" th:field="*{nickname}" class="form-control" id="nickname">
         </div>
 
         <div class="form-group col-md-8">
-            <input type="submit" class="btn btn-primary" value="Update Book">
+            <input type="submit" class="btn btn-primary" value="Create a cat">
         </div>
-    </div>
+    
 </form>
 </html>
