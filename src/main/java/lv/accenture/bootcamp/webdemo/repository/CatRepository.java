@@ -58,13 +58,22 @@ public class CatRepository {
 				// foundCat = cats.get(i);
 				// break;
 				return cat;
-			} 
+			}
 		}
-		
-				throw new IllegalArgumentException("Cat by Id: " + id + "not found");
-				
-		
-		}
-		// return foundCat;
+
+		throw new IllegalArgumentException("Cat by Id: " + id + "not found");
+
 	}
 
+	public void edit(Cat editedCat) {
+
+		for (Cat cat : cats) {
+			if (cat.getId().equals(editedCat.getId())) {
+
+				cat.setNickname(editedCat.getNickname());
+			}
+		}
+
+	}
+
+}
