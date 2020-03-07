@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add a Cat</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h3>Choose a name:</h3>
+       
+      
+      <form action="#"
+      th:action="@{/cats/add-cat{id}(id=${cats.id})}"
+      th:object="${cat}" method="post">
+    <div class="row">
+        <div class="form-group col-md-8">
+            <label for="nickname" class="col-form-label">Nickname:</label><br>
+            <input type="text" th:field="*{nickname}" class="form-control" id="nickname">
+        </div>
+
+        <div class="form-group col-md-8">
+            <input type="submit" class="btn btn-primary" value="Create a cat">
+        </div>
+     
+     </div>
+ 
+</body>
+</html>
