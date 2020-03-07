@@ -48,7 +48,10 @@ public class CatsController {
 	 
 	 @GetMapping("cats/edit/{id}")
 	 public String editCatPage(@PathVariable Long id, Model model) {
-		 System.out.println("id =" + id);
+		 //System.out.println("id =" + id);
+		 Cat catToEdit = catRepository.findById(id);
+		 model.addAttribute("cat", catToEdit);
+		 
 		return "edit-cat";
 		 
 	 }

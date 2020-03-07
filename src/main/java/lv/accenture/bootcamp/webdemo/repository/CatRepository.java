@@ -42,10 +42,25 @@ public class CatRepository {
 		Long newId = biggestCat.getId() + 1;
 		catToAdd.setId(newId);
 		cats.add(catToAdd);
-		
-		//Long maxId=0L;
-		//for(Cat c: cats){
+
+		// Long maxId=0L;
+		// for(Cat c: cats){
 		//
 
+	}
+
+	public Cat findById(Long id) {
+
+		Cat foundCat = new Cat();
+
+		for (int i = 0; i < cats.size(); i++) {
+			if (cats.get(i).getId() == id) {
+				foundCat = cats.get(i);
+				break;
+			} else {
+				continue;
+			}
+		}
+		return foundCat;
 	}
 }
