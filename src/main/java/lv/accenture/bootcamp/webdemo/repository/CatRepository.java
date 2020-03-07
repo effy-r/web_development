@@ -51,16 +51,20 @@ public class CatRepository {
 
 	public Cat findById(Long id) {
 
-		Cat foundCat = new Cat();
+		// Cat foundCat = new Cat();
 
-		for (int i = 0; i < cats.size(); i++) {
-			if (cats.get(i).getId() == id) {
-				foundCat = cats.get(i);
-				break;
-			} else {
-				continue;
-			}
+		for (Cat cat : cats) {
+			if (cat.getId().equals(id)) {
+				// foundCat = cats.get(i);
+				// break;
+				return cat;
+			} 
 		}
-		return foundCat;
+		
+				throw new IllegalArgumentException("Cat by Id: " + id + "not found");
+				
+		
+		}
+		// return foundCat;
 	}
-}
+
