@@ -60,9 +60,33 @@ public class CatsController {
 	public String editCat(@PathVariable Long id, Cat editedCat) {
 
 		editedCat.setId(id);
-		System.out.println("changed nickname" + editedCat.getNickname());
-		System.out.println("id: " + editedCat.getId());
 		catRepository.edit(editedCat);
+		
+		
+
 		return "redirect:/cats";
 	}
+	
+	@GetMapping("cats/delete/{id}")
+	public String deleteCatPage(@PathVariable Long id, Cat deletedCat) {
+		// System.out.println("id =" + id);
+		Cat catToEdit = catRepository.findById(id);
+		catRepository.delete(deletedCat);
+
+		return "redirect:/cats";
+
+	}
+
+//	@PostMapping("/cats/edit-cat/{id}")
+//	public String deleteCat (@PathVariable Long id, Cat deletedCat) {
+//
+//		deletedCat.setId(id);
+//		catRepository.delete(deletedCat);
+//		
+//		
+//
+//		return "redirect:/cats";
+//	}
+	
+	
 }

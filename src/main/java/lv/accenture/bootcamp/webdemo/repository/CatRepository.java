@@ -13,8 +13,10 @@ public class CatRepository {
 	private List<Cat> cats = new ArrayList<>();
 
 	public CatRepository() {
-		cats.add(new Cat(2L, "Kitty"));
-		cats.add(new Cat(3L, "Donald"));
+		cats.add(new Cat(1L, "Kitty", 3, "https://www.motherjones.com/wp-content/uploads/legacy/washington_dispatch/2008/01/socks-hillary-clinton-250x200.jpg?w=990"));
+		cats.add(new Cat(2L, "Garfield", 5, "https://images-na.ssl-images-amazon.com/images/I/51cTtYTNR3L.jpg"));
+		cats.add(new Cat(3L, "Donald", 1,
+				"https://www.masslive.com/resizer/CAVqJHn78UxYXn4uxhhgttnV3Gs=/450x0/smart/arc-anglerfish-arc2-prod-advancelocal.s3.amazonaws.com/public/7IIEZASSYJFRBM2IBU3HJ5FZT4.jpg"));
 	}
 
 	public List<Cat> findAll() {
@@ -67,12 +69,43 @@ public class CatRepository {
 
 	public void edit(Cat editedCat) {
 
-		for (Cat cat : cats) {
-			if (cat.getId().equals(editedCat.getId())) {
+		for (int i = 0; i < cats.size(); i++) {
 
-				cat.setNickname(editedCat.getNickname());
+			if (cats.get(i).getId().equals(editedCat.getId())) {
+
+				cats.set(i, editedCat);
+
+				return;
 			}
+
 		}
+		throw new IllegalArgumentException("Cat by Id: " + editedCat.getId() + "not found");
+
+//		for (Cat cat : cats) {
+//			if (cat.getId().equals(editedCat.getId())) {
+//
+//				cat.setNickname(editedCat.getNickname());
+//				break;
+//			}
+		// }
+
+	}
+
+	public void delete(Cat deletedCat) {
+
+		for (int i = 0; i < cats.size(); i++) {
+
+			if (cats.get(i).getId().equals(deletedCat.getId())) {
+
+				cats.remove(i);
+
+				return;
+			}
+
+		}
+		throw new IllegalArgumentException("Cat by Id: " + deletedCat.getId() + "not found");
+
+		// TODO Auto-generated method stub
 
 	}
 

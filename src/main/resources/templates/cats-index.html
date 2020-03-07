@@ -14,14 +14,26 @@
        <tr>
        <th>Id</th>
        <th>Nickname</th>
+       <th>Age</th>
+       <th>Photo</th>
        <th>Actions</th>
        
-         <tr th:each="cats: ${cats}">
-        <td th:text="${cats.id}"/>
-        <td th:text="${cats.nickname}"/>
+         <tr th:each="cat: ${cats}">
+        <td th:text="${cat.id}"/>
+        <td th:text="${cat.nickname}"/>
+        <td th:text="${cat.age}"/>
+          <td> <img th:src="${cat.photo}" width="80" height = "80"/>
+          </td>
+        
+       
         <td>
-        <a th:href="@{/cats/edit/{id}(id=${cats.id})}" class="btn btn-outline-primary">
+        <a th:href="@{/cats/edit/{id}(id=${cat.id})}" class="btn btn-outline-primary">
+ 
     <span>Edit</span>
+</a>
+<a th:href="@{/cats/delete/{id}(id=${cat.id})}" class="btn btn-outline-primary">
+ 
+    <span>Delete</span>
 </a>
 </td>
     </tr>
@@ -29,8 +41,9 @@
      </table>  
      
      </div>
-     <div>
+     <div class="wrapper">
      <a th:href="@{/cats/add}" class="btn btn-outline-primary">Generate a new cat</a>
+     
     
        
     </div>
