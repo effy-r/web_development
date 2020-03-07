@@ -16,9 +16,36 @@ public class CatRepository {
 		cats.add(new Cat(2L, "Kitty"));
 		cats.add(new Cat(3L, "Donald"));
 	}
-	
-	public List<Cat> findAll(){
-		
+
+	public List<Cat> findAll() {
+
 		return cats;
+	}
+
+	public void add(Cat catToAdd) {
+		// TODO Auto-generated method stub
+		// find biggest id and +1
+		// give a new id to incoming cat
+		// add incoming cat to the list
+
+		Cat biggestCat = cats.get(0);
+
+		for (int i = 0; i < cats.size(); i++) {
+			if (cats.get(i).getId() > biggestCat.getId()) {
+				biggestCat = cats.get(i);
+
+			} else {
+				continue;
+			}
+		}
+
+		Long newId = biggestCat.getId() + 1;
+		catToAdd.setId(newId);
+		cats.add(catToAdd);
+		
+		//Long maxId=0L;
+		//for(Cat c: cats){
+		//
+
 	}
 }

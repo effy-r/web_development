@@ -14,10 +14,16 @@
        <tr>
        <th>Id</th>
        <th>Nickname</th>
+       <th>Actions</th>
        
          <tr th:each="cats: ${cats}">
         <td th:text="${cats.id}"/>
         <td th:text="${cats.nickname}"/>
+        <td>
+        <a th:href="@{/books/edit/{id}(id=${book.id})}" class="btn btn-outline-primary">
+    <span>Edit</span>
+</a>
+</td>
     </tr>
         </tr>
      </table>  

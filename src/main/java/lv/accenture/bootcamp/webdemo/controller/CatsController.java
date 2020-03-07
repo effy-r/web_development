@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import lv.accenture.bootcamp.webdemo.model.Cat;
@@ -32,9 +33,15 @@ public class CatsController {
 	    }
 	 
 	 @GetMapping("/cats/add")
-	 public String addCatPage (Model model, BindResult<Cat> bindingResult) {
+	 public String addCatPage (Model model) {
+		 model.addAttribute("cat", new Cat());
 		 
-		 return "add";
+		 return "add-cat";
 	 }
 
+	 @PostMapping("/cats/add-cat")
+	 public String addCat (Cat catToAdd) {
+		 catRepository.add(catToAdd);
+		 return "cats-index";
+	 }
 }

@@ -12,7 +12,7 @@ public class Cat implements Serializable {
 		this.nickname = nickname;
 	}
 
-	Cat() {
+	public Cat() {
 	}
 
 	public Long getId() {
