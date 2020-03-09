@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
+
 import lv.accenture.bootcamp.webdemo.model.Cat;
 import lv.accenture.bootcamp.webdemo.repository.CatRepository;
 
@@ -28,7 +30,7 @@ public class CatsController {
 		// Cat cat = new Cat(1L,"Muris");
 		// model.addAttribute("cat", cat);
 
-		List<Cat> cats = catRepository.findAll();
+		Iterable<Cat> cats = catRepository.findAll();
 
 		model.addAttribute("cats", cats);
 		return "cats-index";
@@ -43,15 +45,15 @@ public class CatsController {
 
 	@PostMapping("/cats/add-cat")
 	public String addCat(Cat catToAdd) {
-		catRepository.add(catToAdd);
+		catRepository.save(catToAdd);
 		return "redirect:/cats";
 	}
 
 	@GetMapping("cats/edit/{id}")
 	public String editCatPage(@PathVariable Long id, Model model) {
 		// System.out.println("id =" + id);
-		Cat catToEdit = catRepository.findById(id);
-		model.addAttribute("cat", catToEdit);
+		Optional<Cat> catToEdit = catRepository.findById(id);
+		model.addAttribute("cat", catToEdit.get());
 
 		return "edit-cat";
 
@@ -61,15 +63,16 @@ public class CatsController {
 	public String editCat(@PathVariable Long id, Cat editedCat) {
 
 		editedCat.setId(id);
-		catRepository.edit(editedCat);
+		catRepository.save(editedCat);
 
 		return "redirect:/cats";
 	}
 
 	@GetMapping("cats/delete/{id}")
 	public String deleteCatPage(@PathVariable Long id, Cat deletedCat) {
-		// System.out.println("id =" + id);
-		Cat catToEdit = catRepository.findById(id);
+		
+		//not sure if it works. teachers example has findbyID
+		Optional<Cat> catToEdit = catRepository.findById(id);
 		catRepository.delete(deletedCat);
 
 		return "redirect:/cats";
