@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import lv.accenture.bootcamp.webdemo.model.Cat;
@@ -61,12 +62,10 @@ public class CatsController {
 
 		editedCat.setId(id);
 		catRepository.edit(editedCat);
-		
-		
 
 		return "redirect:/cats";
 	}
-	
+
 	@GetMapping("cats/delete/{id}")
 	public String deleteCatPage(@PathVariable Long id, Cat deletedCat) {
 		// System.out.println("id =" + id);
@@ -77,16 +76,14 @@ public class CatsController {
 
 	}
 
-//	@PostMapping("/cats/edit-cat/{id}")
-//	public String deleteCat (@PathVariable Long id, Cat deletedCat) {
-//
-//		deletedCat.setId(id);
-//		catRepository.delete(deletedCat);
-//		
-//		
-//
-//		return "redirect:/cats";
-//	}
-	
-	
+	@GetMapping("cats/search")
+	public String searchCats(@RequestParam String catName, Model model) {
+		
+		List<Cat> matchedCats =  (List<Cat>) catRepository.findByNickname(catName);
+		model.addAttribute("cats", matchedCats);
+
+		return "cats-index";
+
+	}
+
 }

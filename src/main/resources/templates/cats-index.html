@@ -1,51 +1,64 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Cats</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<title>Cats</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
-        <h3>Cats available:</h3>
-       
-       <table class="table table-striped">
-       
-       <tr>
-       <th>Id</th>
-       <th>Nickname</th>
-       <th>Age</th>
-       <th>Photo</th>
-       <th>Actions</th>
-       
-         <tr th:each="cat: ${cats}">
-        <td th:text="${cat.id}"/>
-        <td th:text="${cat.nickname}"/>
-        <td th:text="${cat.age}"/>
-          <td> <img th:src="${cat.photo}" width="80" height = "80"/>
-          </td>
-        
-       
-        <td>
-        <a th:href="@{/cats/edit/{id}(id=${cat.id})}" class="btn btn-outline-primary">
- 
-    <span>Edit</span>
-</a>
-<a th:href="@{/cats/delete/{id}(id=${cat.id})}" class="btn btn-outline-primary">
- 
-    <span>Delete</span>
-</a>
-</td>
-    </tr>
-        </tr>
-     </table>  
-     
-     </div>
-     <div class="wrapper">
-     <a th:href="@{/cats/add}" class="btn btn-outline-primary">Generate a new cat</a>
-     
-    
-       
-    </div>
+
+
+
+	<div class="container">
+
+		<h3>Cats available:</h3>
+
+		<form th:action="@{/cats/search}" method="get">
+			<input type="text" name="catName" id="catName"
+				th:value="${catName}" /> <input type="submit" value="Search" />
+		</form>
+
+		<div th:if="${not #lists.isEmpty(cats)}">
+
+
+			<table class="table table-striped">
+
+				<tr>
+					<th>Id</th>
+					<th>Nickname</th>
+					<th>Age</th>
+					<th>Photo</th>
+					<th>Actions</th>
+				<tr th:each="cat: ${cats}">
+					<td th:text="${cat.id}" />
+					<td th:text="${cat.nickname}" />
+					<td th:text="${cat.age}" />
+					<td><img th:src="${cat.photo}" width="80" height="80" /></td>
+
+
+					<td><a th:href="@{/cats/edit/{id}(id=${cat.id})}"
+						class="btn btn-outline-primary"> <span>Edit</span>
+					</a> <a th:href="@{/cats/delete/{id}(id=${cat.id})}"
+						class="btn btn-outline-primary"> <span>Delete</span>
+					</a></td>
+				</tr>
+
+			</table>
+		</div>
+		<div th:unless="${not #lists.isEmpty(cats)}">
+			<div class="card">
+				<div class="card-body">No cats here!</div>
+
+			</div>
+		</div>
+		<div class="wrapper">
+			<a th:href="@{/cats/add}" class="btn btn-outline-primary">Generate
+				a new cat</a>
+
+
+		</div>
+
+	</div>
 </body>
 </html>
