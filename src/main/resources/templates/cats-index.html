@@ -15,8 +15,10 @@
 		<h3>Cats available:</h3>
 
 		<form th:action="@{/cats/search}" method="get">
-			<input type="text" name="catName" id="catName"
+			<input type="text" class="form-control" name="catName" id="catName"
 				th:value="${catName}" /> <input type="submit" value="Search" />
+
+
 		</form>
 
 		<div th:if="${not #lists.isEmpty(cats)}">
@@ -54,7 +56,12 @@
 		</div>
 		<div class="wrapper">
 			<a th:href="@{/cats/add}" class="btn btn-outline-primary">Generate
-				a new cat</a>
+				a new cat</a> 
+				<a th:href="@{/cats}" class="btn btn-outline-primary">Reload
+				the page</a>
+
+
+
 
 
 		</div>
