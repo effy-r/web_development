@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import lv.accenture.bootcamp.webdemo.model.Cat;
 import lv.accenture.bootcamp.webdemo.repository.CatRepository;
 
@@ -44,9 +46,14 @@ public class CatsController {
 	}
 
 	@PostMapping("/cats/add-cat")
-	public String addCat(Cat catToAdd) {
+	public String addCat(@Valid Cat catToAdd, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return "add-cat";
+		}
+		else {
 		catRepository.save(catToAdd);
 		return "redirect:/cats";
+	}
 	}
 
 	@GetMapping("cats/edit/{id}")
@@ -60,14 +67,18 @@ public class CatsController {
 	}
 
 	@PostMapping("/cats/edit-cat/{id}")
-	public String editCat(@PathVariable Long id, Cat editedCat) {
+	public String editCat(@PathVariable Long id, @Valid Cat editedCat, BindingResult bindingResult) {
 
+		if (bindingResult.hasErrors()) {
+			return "edit-cat";
+		}
+		else {
 		editedCat.setId(id);
 		catRepository.save(editedCat);
 
 		return "redirect:/cats";
 	}
-
+	}
 	@GetMapping("cats/delete/{id}")
 	public String deleteCatPage(@PathVariable Long id, Cat deletedCat) {
 		
@@ -82,6 +93,7 @@ public class CatsController {
 	@GetMapping("cats/search")
 	public String searchCats(@RequestParam String catName, Model model) {
 		
+		//List<Cat> matchedCats =  (List<Cat>) catRepository.findByNicknameContainingIgnoreCase(catName);
 		List<Cat> matchedCats =  (List<Cat>) catRepository.findByNickname(catName);
 		model.addAttribute("cats", matchedCats);
 

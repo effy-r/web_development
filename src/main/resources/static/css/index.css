@@ -8,4 +8,8 @@ h1 {
 .button {
     position: absolute;
     top: 50%;
+    
+    #app h1 {
+    
+    font-size:1.5rem;}
 }

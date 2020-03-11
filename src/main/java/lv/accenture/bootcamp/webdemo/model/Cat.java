@@ -7,6 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
+
+
 
 @Entity
 public class Cat implements Serializable {
@@ -15,9 +20,11 @@ public class Cat implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	//@Column
+	@Size(min = 2, max = 256)
 	private String nickname;
-	private int age;
+	@NotNull (message = "Age should be added!")
+	@PositiveOrZero (message = "Age should be a natural number!")
+	private Integer age;
 	private String photo;
 
 	public Cat(Long id, String nickname) {
@@ -25,7 +32,7 @@ public class Cat implements Serializable {
 		this.nickname = nickname;
 	}
 
-	public Cat(Long id, String nickname, int age, String photo) {
+	public Cat(Long id, String nickname, Integer age, String photo) {
 		this.id = id;
 		this.nickname = nickname;
 		this.age = age;
@@ -51,11 +58,11 @@ public class Cat implements Serializable {
 		this.nickname = nickname;
 	}
 
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
 
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 
